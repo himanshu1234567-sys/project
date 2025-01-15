@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 const AdminPanel = () => {
     const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
+    const navigate = useNavigate();
+
+    // Simulate getting the logged-in username from localStorage
+    const username = localStorage.getItem('username') || 'Admin';
 
     const toggleUserManagement = () => {
         setIsUserManagementOpen(!isUserManagementOpen);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('isAuthenticated'); // Clear authentication state
+        localStorage.removeItem('username'); // Clear saved username
+        navigate('/login'); // Redirect to login page
+    };
+
     return (
-        <div className="flex min-h-screen ">
+        <div className="flex min-h-screen">
             {/* Sidebar */}
             <div className="w-1/4 bg-gray-800 text-white p-6">
                 <h2 className="text-2xl font-bold mb-4">Admin Panel</h2>
@@ -23,11 +32,9 @@ const AdminPanel = () => {
                                 isActive ? 'text-blue-400' : 'text-white'
                             }
                         >
-                            {/* <FontAwesomeIcon icon="fa-solid fa-house" /> */}
                             Dashboard
                         </NavLink>
                     </li>
-
 
                     {/* User Management Section */}
                     <li className="mb-2">
@@ -70,24 +77,39 @@ const AdminPanel = () => {
                         )}
                     </li>
 
+                    {/* Starline Management */}
                     <li className="mb-2">
                         <NavLink
-                            to="/admin/dashboard"
+                            to="/admin/starline-management"
                             className={({ isActive }) =>
                                 isActive ? 'text-blue-400' : 'text-white'
                             }
                         >
-                            {/* <FontAwesomeIcon icon="fa-solid fa-house" /> */}
-                            Starline management
+                            Starline Management
                         </NavLink>
                     </li>
                 </ul>
             </div>
 
             {/* Main Content */}
-            <div className="w-3/4 bg-gray-100 p-6">
+            <div className="w-3/4 bg-gray-100">
+                {/* Header */}
+                <header className="flex justify-between items-center bg-white shadow-md p-4">
+                    <div className="font-medium text-gray-700">
+                        Welcome, <strong>{username}</strong>
+                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                    >
+                        Logout
+                    </button>
+                </header>
 
-                <Outlet />
+                {/* Page Content */}
+                <main className="p-6">
+                    <Outlet />
+                </main>
             </div>
         </div>
     );
