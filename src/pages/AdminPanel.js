@@ -5,7 +5,7 @@ const AdminPanel = () => {
     const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
     const navigate = useNavigate();
 
-    // Simulate getting the logged-in username from localStorage
+
     const username = localStorage.getItem('username') || 'Admin';
 
     const toggleUserManagement = () => {
@@ -13,18 +13,17 @@ const AdminPanel = () => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('isAuthenticated'); // Clear authentication state
-        localStorage.removeItem('username'); // Clear saved username
-        navigate('/login'); // Redirect to login page
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('username');
+        navigate('/login');
     };
 
     return (
         <div className="flex min-h-screen">
-            {/* Sidebar */}
+
             <div className="w-1/4 bg-gray-800 text-white p-6">
                 <h2 className="text-2xl font-bold mb-4">Admin Panel</h2>
                 <ul>
-                    {/* Dashboard Link */}
                     <li className="mb-2">
                         <NavLink
                             to="/admin/dashboard"
@@ -36,7 +35,6 @@ const AdminPanel = () => {
                         </NavLink>
                     </li>
 
-                    {/* User Management Section */}
                     <li className="mb-2">
                         <div
                             onClick={toggleUserManagement}
@@ -77,7 +75,6 @@ const AdminPanel = () => {
                         )}
                     </li>
 
-                    {/* Starline Management */}
                     <li className="mb-2">
                         <NavLink
                             to="/admin/starline-management"
@@ -91,9 +88,8 @@ const AdminPanel = () => {
                 </ul>
             </div>
 
-            {/* Main Content */}
             <div className="w-3/4 bg-gray-100">
-                {/* Header */}
+
                 <header className="flex justify-between items-center bg-white shadow-md p-4">
                     <div className="font-medium text-gray-700">
                         Welcome, <strong>{username}</strong>
@@ -106,7 +102,6 @@ const AdminPanel = () => {
                     </button>
                 </header>
 
-                {/* Page Content */}
                 <main className="p-6">
                     <Outlet />
                 </main>

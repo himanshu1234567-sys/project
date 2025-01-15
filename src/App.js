@@ -17,7 +17,7 @@ const App = () => {
           path="/admin"
           element={isAuthenticated ? <AdminPanel /> : <Navigate to="/" />}
         >
-          {/* Nested Routes */}
+        
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="user-management">
             <Route path="approved" element={<ApprovedUsers />} />

@@ -24,7 +24,6 @@ const UnapprovedUsers = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Toggle the status of a field
   const toggleSwitch = (id, field) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>

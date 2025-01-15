@@ -11,10 +11,10 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (username === 'admin' && password === 'password') { // Example credentials
+        if (username === 'admin' && password === 'password') { 
             dispatch(login({ username }));
-            localStorage.setItem('isAuthenticated', 'true'); // Save login state
-            navigate('/admin'); // Redirect to Admin Panel
+            localStorage.setItem('isAuthenticated', 'true'); 
+            navigate('/admin'); 
         } else {
             alert('Invalid credentials. Please try again.');
         }
